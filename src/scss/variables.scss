@@ -1,0 +1,15 @@
+$orange: #FF971D;
+$white: #FFFFFF;
+$offWhite: #F9F6F7;
+$peach: #FFE8D6;
+$genexBlue: #031b30;
+$lightBlue: #073e52;
+$spinnerBlue: #025270;
+
+@mixin no-interaction {
+  pointer-events: none;
+}
+
+.no-interaction {
+  @include no-interaction;
+}
