@@ -19,24 +19,17 @@ export default {
   },
   data() {
     return {
-      loading: true,
       allowOverflow: true
     }
-  },
-  mounted() {
-    setTimeout(() => {
-      this.loading = false;
-    }, 2000);
-    setTimeout(() => {
-      this.loading = true;
-    }, 6000);
-    setTimeout(() => {
-      this.loading = false;
-    }, 10000);
   },
   methods: {
     toggleOverflow() {
         this.allowOverflow = !this.allowOverflow;
+    }
+  },
+  computed: {
+    loading() {
+      return this.$store.getters.loading;
     }
   }
 }

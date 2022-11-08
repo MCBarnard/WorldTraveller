@@ -7,12 +7,24 @@
 </template>
 
 <script>
-import PageContainer from './components/PageContainer.vue'
+import PageContainer from "./components/PageContainer.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     PageContainer
+  },
+  mounted() {
+    this.$store.dispatch("ACTION_SET_LOADING", true);
+    setTimeout(() => {
+      this.$store.dispatch("ACTION_SET_LOADING", false);
+    }, 2000);
+    setTimeout(() => {
+      this.$store.dispatch("ACTION_SET_LOADING", true);
+    }, 6000);
+    setTimeout(() => {
+      this.$store.dispatch("ACTION_SET_LOADING", false);
+    }, 10000);
   }
 }
 </script>
