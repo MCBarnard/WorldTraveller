@@ -5,6 +5,6 @@ const setup = new Vuex.Store({
     modules: {
         defaultData
     }
-})
+});
 
 export default setup;

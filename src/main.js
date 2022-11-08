@@ -1,18 +1,17 @@
-import Vue from "vue";
-import Vuex from 'vuex'
+import * as Vue from "vue";
 import App from "./App.vue";
 import setup from "./store/setup";
 import router from "./router/setup";
+import axios from 'axios';
 import "./scss/normalize.scss";
 
-Vue.config.productionTip = false;
-Vue.use(Vuex);
-Vue.use(router);
+const app = Vue.createApp(App);
+
+app.use(router);
+app.use(setup);
 
 // Let's us use this.$store in our components
-Vue.prototype.$store = setup;
+app.config.globalProperties.$axios = axios;
+app.config.globalProperties.$store = setup;
 
-new Vue({
-  render: h => h(App),
-  store: setup
-}).$mount('#app');
+app.mount('#app');
