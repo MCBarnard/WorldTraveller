@@ -5,9 +5,33 @@ $peach: #FFE8D6;
 $genexBlue: #031b30;
 $lightBlue: #073e52;
 $spinnerBlue: #025270;
+$svgNormal: $white;
 
 @mixin no-interaction {
   pointer-events: none;
+}
+
+@mixin svg-styles {
+  .normal {
+    width: 25px;
+    fill: $svgNormal;
+    display: block;
+    margin: auto;
+    transition: all 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      fill: $peach;
+    }
+  }
+
+  .active {
+    fill: $orange;
+
+    &:hover {
+      fill: $orange;
+    }
+  }
 }
 
 .no-interaction {

@@ -47,7 +47,6 @@ export default {
   &__inner {
     display: block;
     width: 100%;
-    height: 1000px;
   }
 
   &__loading {
@@ -57,6 +56,7 @@ export default {
     top: 0;
     left: 0;
     overflow: hidden;
+    z-index: 999999;
   }
 }
 

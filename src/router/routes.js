@@ -2,12 +2,12 @@ const routes = [
     {
         path: '/',
         component: () => import('../pages/HomePage.vue'),
-        name: 'default'
+        name: 'countries'
     },
     {
-        path: '/Another',
+        path: '/Travel-Listing',
         component: () => import('../pages/AnotherPage.vue'),
-        name: 'another'
+        name: 'travel-listing'
     },
 ]
 

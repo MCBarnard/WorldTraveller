@@ -13,5 +13,6 @@ app.use(setup);
 // Let's us use this.$store in our components
 app.config.globalProperties.$axios = axios;
 app.config.globalProperties.$store = setup;
+app.config.globalProperties.$router = router;
 
 app.mount('#app');

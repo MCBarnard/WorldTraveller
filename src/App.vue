@@ -1,34 +1,39 @@
 <template>
   <div id="app">
     <page-container>
-      <img alt="Vue logo" src="./assets/logo.png">
+      <div class="split-view">
+        <navbar-component/>
+        <div class="split-view__content">
+          <router-view></router-view>
+        </div>
+      </div>
     </page-container>
   </div>
 </template>
 
 <script>
 import PageContainer from "./components/PageContainer.vue";
+import NavbarComponent from "@/components/Navbar";
 
 export default {
   name: "App",
   components: {
+    NavbarComponent,
     PageContainer
   },
-  mounted() {
-    this.$store.dispatch("ACTION_SET_LOADING", true);
-    setTimeout(() => {
-      this.$store.dispatch("ACTION_SET_LOADING", false);
-    }, 2000);
-    setTimeout(() => {
-      this.$store.dispatch("ACTION_SET_LOADING", true);
-    }, 6000);
-    setTimeout(() => {
-      this.$store.dispatch("ACTION_SET_LOADING", false);
-    }, 10000);
-  }
 }
 </script>
 
 <style scoped lang="scss">
+.split-view {
+  width: 100%;
+  max-height: 100vh;
+  overflow-y: auto;
+  display: flex;
 
+  &__content {
+    overflow-y: auto;
+    width: 100%;
+  }
+}
 </style>
