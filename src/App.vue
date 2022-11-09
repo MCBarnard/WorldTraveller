@@ -20,6 +20,10 @@ export default {
     NavbarComponent,
     PageContainer
   },
+  mounted() {
+    this.$store.dispatch("ACTION_SET_CHANGE_TRAVEL_QUOTE");
+    this.$store.dispatch("ACTION_SET_CHANGE_ACTIVE_AUTHOR");
+  }
 }
 </script>
 

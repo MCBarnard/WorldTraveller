@@ -33,7 +33,9 @@ export default {
   },
   mounted() {
     if (this.loading) {
-      this.hideContent();
+        this.hideContent();
+    } else {
+        this.showContent();
     }
   },
   methods: {
@@ -41,20 +43,14 @@ export default {
       // Stop Spinning
       this.spinSpinner = false;
 
-      // Hide the loader and spinner
-      setTimeout(() => {
-        this.hiddenIcon = true;
-        this.showSpinner = false;
-      }, 500);
+      // Hide the icon and spinner then open the doors
+      this.hiddenIcon = true;
+      this.showSpinner = false;
+      this.closedDoors = false;
 
-      // Open the doors
-      setTimeout(() => {
-        this.closedDoors = false;
-      }, 1000);
-
-      setTimeout(() => {
-        this.$emit('open-doors');
-      }, 1200);
+      // Emit late to allow animations to
+      // finish before allowing user interaction
+      this.$emit('open-doors');
     },
     hideContent() {
       // Emit early to disable scrolling
@@ -63,20 +59,10 @@ export default {
       // Close the doors
       this.closedDoors = true;
 
-      // Show the loader
-      setTimeout(() => {
-        this.hiddenIcon = false;
-      }, 1000);
-
-      // Show the spinner
-      setTimeout(() => {
-        this.showSpinner = true;
-      }, 1200);
-
-      // Start spinning the spinner
-      setTimeout(() => {
-        this.spinSpinner = true;
-      }, 1500);
+      // Show the loader and spinner
+      this.hiddenIcon = false;
+      this.showSpinner = true;
+      this.spinSpinner = true;
     }
   },
   watch: {
@@ -115,6 +101,9 @@ export default {
       vertical-align: center;
       opacity: 1;
       transition: all 0.5s ease;
+      -webkit-transition: all 0.5s ease;
+      -moz-transition: all 0.5s ease;
+      -o-transition: all 0.5s ease;
 
       #loading-spinner {
         width: 90%;
@@ -127,6 +116,9 @@ export default {
         transform: translate(-50%, -50%);
         opacity: 0;
         transition: opacity 0.5s ease;
+        -webkit-transition: opacity 0.5s ease;
+        -moz-transition: opacity 0.5s ease;
+        -o-transition: opacity 0.5s ease;
       }
 
       .show-spinner {
@@ -168,6 +160,9 @@ export default {
     #door-right {
       background: $orange;
       transition: right 1s ease, left 1s ease;
+      -webkit-transition: right 1s ease, left 1s ease;
+      -moz-transition: right 1s ease, left 1s ease;
+      -o-transition: right 1s ease, left 1s ease;
     }
 
     &.should-hide {

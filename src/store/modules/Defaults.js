@@ -1,8 +1,10 @@
-const defaultData = {
+const DefaultData = {
     state: {
         loader: {
-            loading: false,
-            readyToOpen: true
+            // Set this to loading so that we can toggle it in App.vue
+            // as soon as we have our data
+            loading: true,
+            readyToOpen: false
         },
         quotes: {
             travel: [
@@ -60,4 +62,4 @@ const defaultData = {
     }
 };
 
-export default defaultData;
+export default DefaultData;

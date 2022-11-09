@@ -21,7 +21,16 @@
       </div>
     </div>
     <div class="card-holder__cards">
-      <card-component />
+      <card-component v-for="(item, index) in cards" :key="index"
+        :id="item.id"
+        :country="item.country"
+        :region="item.region"
+        :subRegion="item.subRegion"
+        :flag="item.flag"
+        :lat="item.lat"
+        :long="item.long"
+        :seen="item.seen"
+      />
     </div>
   </div>
 </template>
@@ -36,6 +45,7 @@ export default {
     title: String,
     pre: String,
     sub: String,
+    cards: Array
   }
 }
 </script>

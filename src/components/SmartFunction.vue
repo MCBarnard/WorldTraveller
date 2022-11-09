@@ -14,9 +14,7 @@
 export default {
   props: {
     name: String,
-    color: String,
-    url: String,
-    enabled: Boolean
+    color: String
   }
 }
 </script>

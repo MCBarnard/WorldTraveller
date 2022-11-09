@@ -1,9 +1,11 @@
 import Vuex from 'vuex';
-import defaultData from "./modules/Defaults";
+import DefaultData from "./modules/Defaults";
+import CountriesApi from "@/store/modules/CountriesApi";
 
 const setup = new Vuex.Store({
     modules: {
-        defaultData
+        DefaultData,
+        CountriesApi
     }
 });
 

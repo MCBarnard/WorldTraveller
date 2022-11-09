@@ -6,8 +6,8 @@ $genexBlue: #031b30;
 $linkblue: #0070ff;
 $lightBlue: #073e52;
 $spinnerBlue: #025270;
-$svgNormal: $white;
 $bgGrey: #f7f5ff;
+$green: #00c000;
 
 $heading-font: 'Roboto', sans-serif;
 $sub-font: 'Nunito', sans-serif;
@@ -21,19 +21,19 @@ $sub-text-color: #4c5894;
 @mixin svg-styles {
   .normal {
     width: 25px;
-    fill: $svgNormal;
+    fill: $orange;
     display: block;
     margin: auto;
     transition: all 0.2s ease;
     cursor: pointer;
 
     &:hover {
-      fill: $peach;
+      fill: $lightBlue;
     }
   }
 
   .active {
-    fill: $orange;
+    fill: $genexBlue;
 
     &:hover {
       fill: $orange;

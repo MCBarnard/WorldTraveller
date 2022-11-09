@@ -7,11 +7,19 @@
               pre="Done and Dusted, what's next"
               title="Countries of the World"
               sub="The world is waiting, take the leap and venture on to explore the unknown!"
+              :cards="countryList"
           />
+          <div class="home__countries__pagination-section">
+            <button @click="() => {handlePaginationButtonClick('back')}">Back</button>
+            <button @click="() => {handlePaginationButtonClick('next')}">Next</button>
+          </div>
         </div>
       </div>
       <div class="flex-container__right">
         <div class="home__genex">
+          <div class="home__genex__quote">
+            <p><span>{{ quote }}</span> <br><small> - {{ author }}</small></p>
+          </div>
           <div class="home__genex__item">
             <a href="https://genexinstitute.com/" target="_blank" rel="noreferrer">
               <genex-svg />
@@ -28,10 +36,8 @@
           <div class="smart-block-holding">
             <smart-function
                 class="smart-block-item"
-                :enabled="true"
                 name="My Travel List"
-                url="somewhere"
-                color="#08779d"
+                color="#FF971D"
             >
               View <button class="travel-button" @click="goToRoute({name: 'travel-listing'})">My Travel List</button>
             </smart-function>
@@ -41,10 +47,8 @@
           <div class="smart-block-holding">
             <smart-function
                 class="smart-block-item"
-                :enabled="true"
                 name="Search By Name"
-                url="somewhere"
-                color="#0080c9"
+                color="#08779d"
             >
               <label for="name-search-filter">
                 <small>Click out or press enter to search</small>
@@ -67,7 +71,8 @@ import CardTableComponent from "@/components/CardTableComponent";
 export default {
   data() {
     return {
-      nameFilter: ""
+      nameFilter: "",
+      countryList: []
     }
   },
   components: {
@@ -76,22 +81,78 @@ export default {
     SmartFunction
   },
   mixins: [GeneralMixin],
-  mounted() {
-    this.$store.dispatch("ACTION_SET_CHANGE_TRAVEL_QUOTE");
-    this.$store.dispatch("ACTION_SET_CHANGE_ACTIVE_AUTHOR");
-    this.$store.dispatch("ACTION_SET_READY_FOR_NEXT_PAGE", true);
+  async mounted() {
+    // Cater for landing on a fresh page or moving into it
+    await this.$store.dispatch("ACTION_SET_LOADING", true);
+    await this.$store.dispatch("ACTION_SET_READY_FOR_NEXT_PAGE", false);
+
+    if (this.allCountries === undefined || this.allCountries.length === 0) {
+      // Fetch data from countries endpoint
+      await this.$axios.get(this.countriesApiEndpoint).then(async response => {
+        await this.$store.dispatch("ACTION_SET_COUNTRIES", response.data).then(() => {
+          this.paginatedResults(response.data);
+        });
+      });
+    } else {
+      this.paginatedResults(this.allCountries);
+    }
+    await this.$store.dispatch("ACTION_SET_READY_FOR_NEXT_PAGE", true);
   },
   computed: {
-    randomQuote() {
+    quote() {
       return this.$store.getters.randomTravelQuote;
     },
-    randomAuthor() {
+    author() {
       return this.$store.getters.randomAuthor;
-    }
+    },
+    countriesApiEndpoint() {
+      return `${this.$store.getters.countriesApiHost}/all`;
+    },
+    paginatedCountries() {
+      return this.$store.getters.paginatedCountries;
+    },
+    // Is being watched so it is being used
+    activeCountriesComputed() {
+      return this.$store.getters.activeCountries;
+    },
   },
   methods: {
+    handlePaginationButtonClick(direction) {
+      const page = this.$store.getters.countryCurrentPage;
+      if (direction === "next") {
+        this.paginatedResults(this.allCountries, page + 1);
+      } else {
+        // Default Page starts at 1
+        if (page > 1) {
+          this.paginatedResults(this.allCountries, page - 1);
+        }
+      }
+    },
     nameEntered() {
       console.log(this.nameFilter)
+    },
+    packagedCountriesDataSet() {
+      const formatted = [];
+      const data = this.paginatedCountries.data;
+      data.forEach((item) => {
+        formatted.push({
+          id: item.name.common,
+          country: item.name.common,
+          region: item.region,
+          subRegion: item.subregion,
+          flag: item.flags.png,
+          lat: item.latlng[0],
+          long: item.latlng[1],
+        });
+      })
+      return formatted;
+    },
+  },
+  watch: {
+    activeCountriesComputed(val) {
+      if (val !== undefined && val.length > 0) {
+        this.countryList = this.packagedCountriesDataSet();
+      }
     }
   }
 }
@@ -109,7 +170,7 @@ export default {
   &__genex {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: space-between;
     margin-right: 20px;
 
     a {
@@ -122,6 +183,26 @@ export default {
       padding: 5px 10px;
     }
 
+    &__quote {
+      background: $bgGrey;
+      padding: 10px;
+      border-radius: 10px;
+
+      p {
+        font-size: 12px;
+        max-width: 190px;
+        text-align: start;
+        color: $main-text-color;
+        font-weight: 600;
+
+        small {
+          text-align: end;
+          font-size: 10px;
+          color: $sub-text-color;
+        }
+      }
+    }
+
     &__item {
       background: radial-gradient($lightBlue 20%, $genexBlue 100%);
       border-radius: 15px;
@@ -129,6 +210,9 @@ export default {
       width: 100px;
       display: flex;
       transition: all 0.4s ease;
+      -webkit-transition: all 0.4s ease;
+      -moz-transition: all 0.4s ease;
+      -o-transition: all 0.4s ease;
 
       &:hover {
         cursor: pointer;
@@ -192,6 +276,32 @@ export default {
     }
   }
 
+  &__countries {
+    &__pagination-section {
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 10px 0;
+
+      button {
+        background: radial-gradient(#0070ff 10%, $genexBlue 100%);
+        color: $white;
+        outline: none!important;
+        border: none!important;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        box-shadow: 0 0 200px 5px #988a8a;
+
+        &:hover {
+          background: radial-gradient(#0070ff 10%, #073e52 100%);
+          box-shadow: 0 0 11px -2px #09697e;
+        }
+      }
+    }
+  }
+
   .flex-container {
     display: flex;
     height: calc(100% - 90px);
@@ -201,7 +311,7 @@ export default {
     }
 
     &__right {
-      margin-left: 20px;
+      margin-left: 40px;
       height: 100%;
     }
   }
