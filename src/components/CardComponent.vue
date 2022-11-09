@@ -117,7 +117,6 @@ export default {
       transform: translateX(-50%);
       height: 50px;
       width: 3px;
-      margin: auto 20px;
       border-radius: 5px;
       background: $lightBlue;
       background: linear-gradient($lightBlue, $linkblue, $lightBlue);

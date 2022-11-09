@@ -20,6 +20,9 @@
         </div>
       </div>
     </div>
+    <div class="pagination-page">
+      <p>Displaying page {{ currentPageComputed }} of {{ totalItemsComputed }}</p>
+    </div>
     <div class="card-holder__cards">
       <card-component v-for="(item, index) in cards" :key="index"
         :id="item.id"
@@ -46,6 +49,14 @@ export default {
     pre: String,
     sub: String,
     cards: Array
+  },
+  computed: {
+    currentPageComputed() {
+      return this.$store.getters.countryCurrentPage;
+    },
+    totalItemsComputed() {
+      return this.$store.getters.totalActiveCountries;
+    },
   }
 }
 </script>
@@ -54,6 +65,15 @@ export default {
 @import "@/scss/variables.scss";
 
 .card-holder {
+  .pagination-page {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    font-size: 12px;
+    font-family: $sub-font;
+    color: $sub-text-color;
+  }
+
   .text-center {
     text-align: center;
 
@@ -114,10 +134,6 @@ export default {
       color: $main-text-color;
       font-size: 28px;
     }
-  }
-
-  &__cards {
-
   }
 }
 </style>

@@ -20,6 +20,7 @@ const CountriesApi = {
         allCountries: state => state.countries.all,
         paginatedCountries: state => state.countries.paginatedCountries,
         activeCountries: state => state.countries.paginatedCountries.data,
+        totalActiveCountries: state => state.countries.paginatedCountries.totalItems,
         countryCurrentPage: state => state.countries.currentPage,
     },
     mutations: {

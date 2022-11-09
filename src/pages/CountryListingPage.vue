@@ -94,11 +94,15 @@ export default {
         });
       });
     } else {
+      // Intentionally also don't pass page so that it resets to 1 on page load
       this.paginatedResults(this.allCountries);
     }
     await this.$store.dispatch("ACTION_SET_READY_FOR_NEXT_PAGE", true);
   },
   computed: {
+    allCountries() {
+      return this.$store.getters.allCountries;
+    },
     quote() {
       return this.$store.getters.randomTravelQuote;
     },
@@ -117,6 +121,30 @@ export default {
     },
   },
   methods: {
+    paginatedResults(data, page=1, perPage=10) {
+      const formattedResults = {
+        data: [],
+        page: page,
+        totalItems: data.length,
+        itemsPerPage: perPage
+      };
+
+      // Set the page in the store to update visually for user
+      this.$store.dispatch("ACTION_SET_CURRENT_PAGE", page);
+
+      // Get our current active data items
+      const currentLowerActiveIndex = (perPage * page) - perPage;
+      const currentUpperActiveIndex = (perPage * page) - 1;
+
+      for (let index = currentLowerActiveIndex; index <= currentUpperActiveIndex; index++) {
+        // Push required Docs
+        if (index >= currentLowerActiveIndex && index <= currentUpperActiveIndex) {
+          formattedResults.data.push(data[index]);
+        }
+      }
+
+      this.$store.dispatch("ACTION_SET_PAGINATED_COUNTRIES", formattedResults);
+    },
     handlePaginationButtonClick(direction) {
       const page = this.$store.getters.countryCurrentPage;
       if (direction === "next") {
