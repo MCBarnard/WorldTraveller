@@ -25,14 +25,15 @@
 <script>
 import MapSvg from "@/components/SVGs/MapSvg";
 import ListingSvg from "@/components/SVGs/ListingSvg";
+import CookieSvg from "@/components/SVGs/CookieSvg";
 import { shallowRef } from "vue";
 import { GeneralMixin } from "../mixins/GeneralMixin";
 
 export default {
-  name: "NavbarComponent",
   components: {
     MapSvg,
-    ListingSvg
+    ListingSvg,
+    CookieSvg
   },
   mixins: [GeneralMixin],
   data() {
@@ -47,6 +48,10 @@ export default {
         {
           route: "travel-listing",
           svg: shallowRef(ListingSvg)
+        },
+        {
+          route: "cookie-settings",
+          svg: shallowRef(CookieSvg)
         }
       ]
     }
@@ -66,12 +71,18 @@ export default {
   width: 100px;
   height: 100vh;
   background: $genexBlue;
-  padding: 100px 0 10px 10px;
+  // We only want padding on the left to ensure we don't touch the side of the screen
+  padding: 0 0 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   &__item {
     position: relative;
     padding: 20px 5px;
     border-radius: 50px 0 0 50px;
+    cursor: pointer;
+    margin-bottom: 40px;
   }
 
   &__item.active {
@@ -84,10 +95,10 @@ export default {
     .navbar__item__top-border {
       content: "";
       position: absolute;
-      top: -30px;
+      top: -50px;
       right: 0;
-      height: 30px;
-      width: 30px;
+      height: 50px;
+      width: 50px;
       background: $white;
 
       &__overlay {
@@ -95,8 +106,8 @@ export default {
         position:absolute;
         top: 0;
         right: 0;
-        height: 30px;
-        width: 30px;
+        height: 50px;
+        width: 50px;
         border-bottom-right-radius: 50%;
         background: $genexBlue;
       }
@@ -105,10 +116,10 @@ export default {
     .navbar__item__bottom-border {
       content: "";
       position: absolute;
-      bottom: -30px;
+      bottom: -50px;
       right: 0;
-      height: 30px;
-      width: 30px;
+      height: 50px;
+      width: 50px;
       background: $white;
 
       &__overlay {
@@ -116,8 +127,8 @@ export default {
         position:absolute;
         top: 0;
         right: 0;
-        height: 30px;
-        width: 30px;
+        height: 50px;
+        width: 50px;
         border-top-right-radius: 50%;
         background: $genexBlue;
       }

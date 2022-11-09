@@ -3,9 +3,16 @@ $white: #FFFFFF;
 $offWhite: #F9F6F7;
 $peach: #FFE8D6;
 $genexBlue: #031b30;
+$linkblue: #0070ff;
 $lightBlue: #073e52;
 $spinnerBlue: #025270;
 $svgNormal: $white;
+$bgGrey: #f7f5ff;
+
+$heading-font: 'Roboto', sans-serif;
+$sub-font: 'Nunito', sans-serif;
+$main-text-color: #172c3d;
+$sub-text-color: #4c5894;
 
 @mixin no-interaction {
   pointer-events: none;
@@ -36,4 +43,8 @@ $svgNormal: $white;
 
 .no-interaction {
   @include no-interaction;
+}
+
+* {
+  font-family: $heading-font;
 }

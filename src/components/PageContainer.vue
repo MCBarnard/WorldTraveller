@@ -13,7 +13,6 @@
 import LoadAnimationComponent from "@/components/LoadAnimationComponent";
 
 export default {
-  name: 'PageContainer',
   components: {
     LoadAnimationComponent
   },

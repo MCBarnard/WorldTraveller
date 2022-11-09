@@ -13,10 +13,9 @@
 
 <script>
 import PageContainer from "./components/PageContainer.vue";
-import NavbarComponent from "@/components/Navbar";
+import NavbarComponent from "@/components/NavbarComponent";
 
 export default {
-  name: "App",
   components: {
     NavbarComponent,
     PageContainer
