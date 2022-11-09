@@ -157,7 +157,22 @@ export default {
       }
     },
     nameEntered() {
-      console.log(this.nameFilter)
+      // preparing to filter
+      this.filterThroughData("country", this.nameFilter);
+    },
+    filterThroughData(filter, value) {
+      console.log("Filtering by " + filter + " for " + value);
+      // Fetch all the countries to search through and
+      // init a clean array for filling
+      const data = this.allCountries;
+
+      // Loop through them checking if the name matches a substring value
+      const filteredArray = data.filter(item => item.name.common === value);
+      console.log(filteredArray)
+
+      // call the this.paginatedResults(filtered data); which
+      // sets the active array this should also automatically take care of the rest
+      this.paginatedResults(filteredArray);
     },
     packagedCountriesDataSet() {
       const formatted = [];
@@ -215,6 +230,7 @@ export default {
       background: $bgGrey;
       padding: 10px;
       border-radius: 10px;
+      box-shadow: 0 0 50px -40px #625a5a;
 
       p {
         font-size: 12px;
@@ -250,13 +266,12 @@ export default {
   }
 
   &__contact {
-    height: 100%;
     background: $bgGrey;
     padding: 40px;
-    border-radius: 20px 0 0 0;
-    margin-top: 40px;
+    border-radius: 20px 0 0 20px;
+    margin-top: 45px;
     width: 360px;
-    box-shadow: 0 0 200px 5px #f7f7f7;
+    box-shadow: 0 0 50px -40px #625a5a;
 
     h3 {
       font-family: $heading-font;
@@ -287,6 +302,7 @@ export default {
 
       .smart-block-item {
         margin: 10px 0;
+        box-shadow: 0 0 50px -40px #625a5a;
       }
     }
 
@@ -320,7 +336,7 @@ export default {
         padding: 10px 20px;
         border-radius: 10px;
         cursor: pointer;
-        box-shadow: 0 0 200px 5px #988a8a;
+        box-shadow: 0 0 50px -40px #625a5a;
 
         &:hover {
           background: radial-gradient(#0070ff 10%, #073e52 100%);
@@ -332,14 +348,14 @@ export default {
 
   .flex-container {
     display: flex;
-    height: calc(100% - 90px);
+    height: calc(100% - 140px);
 
     &__left {
       width: 100%;
     }
 
     &__right {
-      margin-left: 40px;
+      margin-left: 45px;
       height: 100%;
     }
   }

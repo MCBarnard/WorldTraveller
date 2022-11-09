@@ -170,7 +170,7 @@ export default {
     -o-transition: all 0.4s;
     border-radius: 15px;
     position: relative;
-    box-shadow: 0 0 200px 5px #f7f7f7;
+    box-shadow: 0 0 50px -40px #625a5a;
     cursor: pointer;
     background: $bgGrey;
     padding: 20px;

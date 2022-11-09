@@ -21,6 +21,7 @@ const CountriesApi = {
         paginatedCountries: state => state.countries.paginatedCountries,
         activeCountries: state => state.countries.paginatedCountries.data,
         totalActiveCountries: state => state.countries.paginatedCountries.totalItems,
+        currentItemsPerPage: state => state.countries.paginatedCountries.itemsPerPage,
         countryCurrentPage: state => state.countries.currentPage,
     },
     mutations: {
