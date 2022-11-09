@@ -10,8 +10,12 @@
               :cards="countryList"
           />
           <div class="home__countries__pagination-section">
-            <button @click="() => {handlePaginationButtonClick('back')}">Back</button>
-            <button @click="() => {handlePaginationButtonClick('next')}">Next</button>
+            <button @click="() => {handlePaginationButtonClick('back')}"
+              :class="[{'disabled': !paginationHasPrevious}]"
+            >Back</button>
+            <button @click="() => {handlePaginationButtonClick('next')}"
+              :class="[{'disabled': !paginationHasNext}]"
+            >Next</button>
           </div>
         </div>
       </div>
@@ -53,7 +57,7 @@
               <label for="name-search-filter">
                 <small>Click out or press enter to search</small>
               </label>
-              <input id="name-search-filter" type="text" v-model="nameFilter" @change="nameEntered">
+              <input id="name-search-filter" type="text" v-model="nameFilter" placeholder="Enter a country name" @change="nameEntered">
             </smart-function>
           </div>
         </div>
@@ -88,11 +92,7 @@ export default {
 
     if (this.allCountries === undefined || this.allCountries.length === 0) {
       // Fetch data from countries endpoint
-      await this.$axios.get(this.countriesApiEndpoint).then(async response => {
-        await this.$store.dispatch("ACTION_SET_COUNTRIES", response.data).then(() => {
-          this.paginatedResults(response.data);
-        });
-      });
+      await this.fetchFreshCountryData();
     } else {
       // Intentionally also don't pass page so that it resets to 1 on page load
       this.paginatedResults(this.allCountries);
@@ -100,6 +100,12 @@ export default {
     await this.$store.dispatch("ACTION_SET_READY_FOR_NEXT_PAGE", true);
   },
   computed: {
+    paginationHasNext() {
+      return this.$store.getters.countryPaginationHasNext;
+    },
+    paginationHasPrevious() {
+      return this.$store.getters.countryPaginationHasPrevious;
+    },
     allCountries() {
       return this.$store.getters.allCountries;
     },
@@ -108,9 +114,6 @@ export default {
     },
     author() {
       return this.$store.getters.randomAuthor;
-    },
-    countriesApiEndpoint() {
-      return `${this.$store.getters.countriesApiHost}/all`;
     },
     paginatedCountries() {
       return this.$store.getters.paginatedCountries;
@@ -121,54 +124,53 @@ export default {
     },
   },
   methods: {
-    paginatedResults(data, page=1, perPage=10) {
-      const formattedResults = {
-        data: [],
-        page: page,
-        totalItems: data.length,
-        itemsPerPage: perPage
-      };
-
-      // Set the page in the store to update visually for user
-      this.$store.dispatch("ACTION_SET_CURRENT_PAGE", page);
-
-      // Get our current active data items
-      const currentLowerActiveIndex = (perPage * page) - perPage;
-      const currentUpperActiveIndex = (perPage * page) - 1;
-
-      for (let index = currentLowerActiveIndex; index <= currentUpperActiveIndex; index++) {
-        // Push required Docs
-        if (index >= currentLowerActiveIndex && index <= currentUpperActiveIndex) {
-          formattedResults.data.push(data[index]);
-        }
+    clearFlippedCards() {
+      const items = document.getElementsByClassName("flipped");
+      for(let i = 0; i < items.length; i++) {
+        this.flipCard(items[i].id);
       }
-
-      this.$store.dispatch("ACTION_SET_PAGINATED_COUNTRIES", formattedResults);
     },
     handlePaginationButtonClick(direction) {
-      const page = this.$store.getters.countryCurrentPage;
-      if (direction === "next") {
+      // Clear all the flipped cards first
+      this.clearFlippedCards();
+
+      const page = this.currentPageComputed;
+      if (direction === "next" && this.paginationHasNext) {
         this.paginatedResults(this.allCountries, page + 1);
-      } else {
-        // Default Page starts at 1
-        if (page > 1) {
-          this.paginatedResults(this.allCountries, page - 1);
-        }
+      } else if (direction === "back" && this.paginationHasPrevious && page > 1) {
+        this.paginatedResults(this.allCountries, page - 1);
       }
     },
-    nameEntered() {
-      // preparing to filter
-      this.filterThroughData("country", this.nameFilter);
+    async nameEntered() {
+      if (this.nameFilter) {
+        // Check if we need to do new calls to the db
+        if (!this.eagerLoadCountries) {
+          await this.fetchFreshCountryData("name", this.nameFilter);
+        } else {
+          // preparing to filter
+          this.paginatedResults(this.allCountries, this.currentPageComputed);
+          this.filterThroughData("country", this.nameFilter);
+        }
+      } else {
+        this.resetFilters();
+      }
     },
+    async resetFilters() {
+      // Passing the original data will reset the pagination
+      if (!this.eagerLoadCountries) {
+        await this.fetchFreshCountryData();
+      } else {
+        this.paginatedResults(this.allCountries);
+      }
+    },
+    // Built in a way we can easily reuse for future filters
     filterThroughData(filter, value) {
-      console.log("Filtering by " + filter + " for " + value);
       // Fetch all the countries to search through and
       // init a clean array for filling
-      const data = this.allCountries;
+      let data = this.allCountries;
 
       // Loop through them checking if the name matches a substring value
       const filteredArray = data.filter(item => item.name.common === value);
-      console.log(filteredArray)
 
       // call the this.paginatedResults(filtered data); which
       // sets the active array this should also automatically take care of the rest
@@ -176,7 +178,7 @@ export default {
     },
     packagedCountriesDataSet() {
       const formatted = [];
-      const data = this.paginatedCountries.data;
+      let data = this.paginatedCountries.data;
       data.forEach((item) => {
         formatted.push({
           id: item.name.common,
@@ -304,6 +306,18 @@ export default {
         margin: 10px 0;
         box-shadow: 0 0 50px -40px #625a5a;
       }
+
+      input {
+        outline: 0;
+        border-radius: 10px;
+        background: #f2f2f2;
+        width: 100%;
+        border: 0;
+        margin: 10px 0 15px;
+        padding: 5px 15px;
+        box-sizing: border-box;
+        font-size: 18px;
+      }
     }
 
     .travel-button {
@@ -341,6 +355,18 @@ export default {
         &:hover {
           background: radial-gradient(#0070ff 10%, #073e52 100%);
           box-shadow: 0 0 11px -2px #09697e;
+        }
+
+        &.disabled {
+          background: radial-gradient(#989898 10%, #3f3f3f 100%);
+          cursor: default!important;
+          opacity: 0;
+          pointer-events: none!important;
+
+          &:hover {
+            background: radial-gradient(#989898 10%, #3f3f3f 100%);
+            box-shadow: 0 0 50px -40px #625a5a;
+          }
         }
       }
     }

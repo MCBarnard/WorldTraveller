@@ -1,6 +1,6 @@
 <template>
-  <div :id="'card_' + id" @click="flipCard('card_' + id)" :class="['card', {'unconquered': !seen}]">
-    <div class="card__front">
+  <div :id="'card_' + id" class="card">
+    <div class="card__front" @click="flipCard('card_' + id)">
       <div class="card__hover-block"></div>
       <div class="card__front__country">
         <small>COUNTRY</small>
@@ -14,13 +14,18 @@
     </div>
     <div class="card__back">
       <div class="card__hover-block"></div>
-      I'm the card's back side
+      <button class="close-card" @click="flipCard('card_' + id)">Close</button>
+      <button>Add to my list!</button>
+      <button>Mark as visited</button>
     </div>
   </div>
 </template>
 
 <script>
+import {GeneralMixin} from "@/mixins/GeneralMixin";
+
 export default {
+  mixins: [GeneralMixin],
   props: {
     id: String,
     country: String,
@@ -28,34 +33,7 @@ export default {
     subRegion: String,
     flag: String,
     lat: Number,
-    long: Number,
-    seen: Boolean,
-  },
-  methods: {
-    flipCard(id) {
-      let item = document.getElementById(id);
-      if (!item.classList.contains('flippit')) {
-        item.classList.add('flippit');
-        setTimeout(() => {
-          item.getElementsByClassName('card__front')[0].style.opacity = '0'
-        }, 150);
-        setTimeout(() => {
-          item.getElementsByClassName('card__front')[0].style.display = 'none'
-          item.getElementsByClassName('card__back')[0].style.display = 'block'
-          item.getElementsByClassName('card__back')[0].style.opacity = '1'
-        }, 300);
-      }else {
-        item.classList.remove('flippit');
-        setTimeout(() => {
-          item.getElementsByClassName('card__back')[0].style.opacity = '0'
-        }, 300);
-        setTimeout(() => {
-          item.getElementsByClassName('card__back')[0].style.display = 'none'
-          item.getElementsByClassName('card__front')[0].style.display = 'flex'
-          item.getElementsByClassName('card__front')[0].style.opacity = '1'
-        }, 300);
-      }
-    }
+    long: Number
   }
 }
 </script>
@@ -65,30 +43,6 @@ export default {
 
 .card {
   position: relative;
-  &:after {
-    content: "";
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 20px;
-    height: 20px;
-    background: $orange;
-    z-index: -1;
-  }
-
-  &.unconquered {
-    &:after {
-      content: "";
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: $green;
-      z-index: -1;
-      right: -2px;
-      top: -2px;
-      border-radius: 5px;
-    }
-  }
 
   & + .card {
     margin-top: 10px;
@@ -197,7 +151,7 @@ export default {
   }
 }
 
-.flippit {
+.flipped {
   .card__front {
     transform: rotateX(-100deg);
   }

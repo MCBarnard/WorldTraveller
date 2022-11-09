@@ -21,7 +21,7 @@
       </div>
     </div>
     <div class="pagination-page">
-      <p>Displaying page {{ currentPageComputed * currentItemsPerPageComputed }} of {{ totalItemsComputed }}</p>
+      <p>Displaying {{ currentPageComputed * currentItemsPerPageComputed }} of {{ totalItemsComputed }}</p>
     </div>
     <div class="card-holder__cards">
       <card-component v-for="(item, index) in cards" :key="index"
@@ -32,7 +32,6 @@
         :flag="item.flag"
         :lat="item.lat"
         :long="item.long"
-        :seen="item.seen"
       />
     </div>
   </div>
@@ -40,7 +39,10 @@
 
 <script>
 import CardComponent from "@/components/CardComponent";
+import {GeneralMixin} from "@/mixins/GeneralMixin";
+
 export default {
+  mixins: [GeneralMixin],
   components: {
     CardComponent
   },
@@ -51,9 +53,6 @@ export default {
     cards: Array
   },
   computed: {
-    currentPageComputed() {
-      return this.$store.getters.countryCurrentPage;
-    },
     currentItemsPerPageComputed() {
       return this.$store.getters.currentItemsPerPage;
     },

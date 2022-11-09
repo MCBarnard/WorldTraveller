@@ -11,18 +11,30 @@ const CountriesApi = {
                 page: undefined,
                 totalItems: undefined,
             },
-            pages: [],
-            currentPage: "0-9"
+            eagerLoad: false,
+            pages: []
         }
     },
     getters: {
+        eagerLoadCountries: state => state.countries.eagerLoad,
         countriesApiHost: state => state.countries.api.host,
         allCountries: state => state.countries.all,
         paginatedCountries: state => state.countries.paginatedCountries,
         activeCountries: state => state.countries.paginatedCountries.data,
         totalActiveCountries: state => state.countries.paginatedCountries.totalItems,
         currentItemsPerPage: state => state.countries.paginatedCountries.itemsPerPage,
-        countryCurrentPage: state => state.countries.currentPage,
+        countryCurrentPage: state => state.countries.paginatedCountries.page,
+        countryPaginationHasNext: state => {
+            let page = state.countries.paginatedCountries.page;
+            let totalItems = state.countries.paginatedCountries.totalItems;
+            let itemsPerPage = state.countries.paginatedCountries.itemsPerPage;
+
+            let currentItemMax = page * itemsPerPage;
+            return currentItemMax < totalItems;
+        },
+        countryPaginationHasPrevious: state => {
+            return state.countries.currentPage > 1;
+        },
     },
     mutations: {
         SET_COUNTRIES (state, countries) {
