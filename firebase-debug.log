@@ -1,0 +1,92 @@
+[debug] [2022-11-10T04:13:49.658Z] ----------------------------------------------------------------------
+[debug] [2022-11-10T04:13:49.659Z] Command:       /home/thinus/.nvm/versions/node/v16.4.0/bin/node /home/thinus/.nvm/versions/node/v16.4.0/bin/firebase deploy
+[debug] [2022-11-10T04:13:49.659Z] CLI Version:   11.16.0
+[debug] [2022-11-10T04:13:49.659Z] Platform:      linux
+[debug] [2022-11-10T04:13:49.659Z] Node Version:  v16.4.0
+[debug] [2022-11-10T04:13:49.662Z] Time:          Thu Nov 10 2022 06:13:49 GMT+0200 (South Africa Standard Time)
+[debug] [2022-11-10T04:13:49.662Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-10T04:13:49.706Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-10T04:13:49.706Z] > authorizing via signed-in user (thinusplanb97@gmail.com)
+[debug] [2022-11-10T04:13:49.706Z] [iam] checking project travelplanner-4ac13 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-11-10T04:13:49.707Z] > refreshing access token with scopes: []
+[debug] [2022-11-10T04:13:49.708Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2022-11-10T04:13:49.709Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-10T04:13:50.696Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2022-11-10T04:13:50.697Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2022-11-10T04:13:50.700Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions [none]
+[debug] [2022-11-10T04:13:50.700Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions x-goog-quota-user=projects/travelplanner-4ac13
+[debug] [2022-11-10T04:13:50.700Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-10T04:13:53.046Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions 200
+[debug] [2022-11-10T04:13:53.047Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-10T04:13:53.050Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/travelplanner-4ac13 [none]
+[debug] [2022-11-10T04:13:54.277Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/travelplanner-4ac13 200
+[debug] [2022-11-10T04:13:54.277Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/travelplanner-4ac13 {"projectId":"travelplanner-4ac13","projectNumber":"936447040857","displayName":"TravelPlanner","name":"projects/travelplanner-4ac13","resources":{"hostingSite":"travelplanner-4ac13"},"state":"ACTIVE","etag":"1_c171a205-faad-4a97-8049-65b78b0114d5"}
+[info] 
+[info] === Deploying to 'travelplanner-4ac13'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-11-10T04:13:54.280Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions [none]
+[debug] [2022-11-10T04:13:54.280Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
+[debug] [2022-11-10T04:13:57.038Z] <<< [apiv2][status] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions 200
+[debug] [2022-11-10T04:13:57.039Z] <<< [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions {"name":"projects/936447040857/sites/travelplanner-4ac13/versions/a1009f4114ee32b3","status":"CREATED","config":{},"labels":{"deployment-tool":"cli-firebase"}}
+[info] i  hosting[travelplanner-4ac13]: beginning deploy... 
+[info] i  hosting[travelplanner-4ac13]: found 0 files in dist 
+[debug] [2022-11-10T04:13:57.054Z] [hosting] uploading with 200 concurrency
+[info] ✔  hosting[travelplanner-4ac13]: file upload complete 
+[debug] [2022-11-10T04:13:57.064Z] [hosting] deploy completed after 21ms
+[debug] [2022-11-10T04:13:57.068Z] [
+  {
+    "config": {
+      "public": "dist",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ],
+      "site": "travelplanner-4ac13"
+    },
+    "version": "projects/936447040857/sites/travelplanner-4ac13/versions/a1009f4114ee32b3"
+  }
+]
+[info] i  hosting[travelplanner-4ac13]: finalizing version... 
+[debug] [2022-11-10T04:13:57.073Z] >>> [apiv2][query] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions/a1009f4114ee32b3 updateMask=status%2Cconfig
+[debug] [2022-11-10T04:13:57.073Z] >>> [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions/a1009f4114ee32b3 {"status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]}}
+[debug] [2022-11-10T04:13:59.293Z] <<< [apiv2][status] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions/a1009f4114ee32b3 200
+[debug] [2022-11-10T04:13:59.294Z] <<< [apiv2][body] PATCH https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions/a1009f4114ee32b3 {"name":"projects/936447040857/sites/travelplanner-4ac13/versions/a1009f4114ee32b3","status":"FINALIZED","config":{"rewrites":[{"glob":"**","path":"/index.html"}]},"labels":{"deployment-tool":"cli-firebase"},"createTime":"2022-11-10T04:13:56.509955Z","createUser":{"email":"Thinusplanb97@gmail.com"},"finalizeTime":"2022-11-10T04:13:59.105413Z","finalizeUser":{"email":"Thinusplanb97@gmail.com"}}
+[debug] [2022-11-10T04:13:59.295Z] [hosting] finalized version for travelplanner-4ac13:[object Object]
+[info] ✔  hosting[travelplanner-4ac13]: version finalized 
+[info] i  hosting[travelplanner-4ac13]: releasing new version... 
+[debug] [2022-11-10T04:13:59.297Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/channels/live/releases versionName=projects%2F936447040857%2Fsites%2Ftravelplanner-4ac13%2Fversions%2Fa1009f4114ee32b3
+[debug] [2022-11-10T04:13:59.298Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/channels/live/releases {}
+[debug] [2022-11-10T04:14:45.137Z] ----------------------------------------------------------------------
+[debug] [2022-11-10T04:14:45.138Z] Command:       /home/thinus/.nvm/versions/node/v16.4.0/bin/node /home/thinus/.nvm/versions/node/v16.4.0/bin/firebase deploy
+[debug] [2022-11-10T04:14:45.138Z] CLI Version:   11.16.0
+[debug] [2022-11-10T04:14:45.138Z] Platform:      linux
+[debug] [2022-11-10T04:14:45.138Z] Node Version:  v16.4.0
+[debug] [2022-11-10T04:14:45.139Z] Time:          Thu Nov 10 2022 06:14:45 GMT+0200 (South Africa Standard Time)
+[debug] [2022-11-10T04:14:45.139Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2022-11-10T04:14:45.192Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2022-11-10T04:14:45.192Z] > authorizing via signed-in user (thinusplanb97@gmail.com)
+[debug] [2022-11-10T04:14:45.192Z] [iam] checking project travelplanner-4ac13 for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2022-11-10T04:14:45.195Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions [none]
+[debug] [2022-11-10T04:14:45.195Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions x-goog-quota-user=projects/travelplanner-4ac13
+[debug] [2022-11-10T04:14:45.195Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-10T04:14:47.267Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions 200
+[debug] [2022-11-10T04:14:47.267Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/travelplanner-4ac13:testIamPermissions {"permissions":["firebase.projects.get","firebasehosting.sites.update"]}
+[debug] [2022-11-10T04:14:47.268Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/travelplanner-4ac13 [none]
+[debug] [2022-11-10T04:14:48.113Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/travelplanner-4ac13 200
+[debug] [2022-11-10T04:14:48.113Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/travelplanner-4ac13 {"projectId":"travelplanner-4ac13","projectNumber":"936447040857","displayName":"TravelPlanner","name":"projects/travelplanner-4ac13","resources":{"hostingSite":"travelplanner-4ac13"},"state":"ACTIVE","etag":"1_c171a205-faad-4a97-8049-65b78b0114d5"}
+[info] 
+[info] === Deploying to 'travelplanner-4ac13'...
+[info] 
+[info] i  deploying hosting 
+[debug] [2022-11-10T04:14:48.116Z] >>> [apiv2][query] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions [none]
+[debug] [2022-11-10T04:14:48.116Z] >>> [apiv2][body] POST https://firebasehosting.googleapis.com/v1beta1/projects/-/sites/travelplanner-4ac13/versions {"status":"CREATED","labels":{"deployment-tool":"cli-firebase"}}
