@@ -87,6 +87,9 @@ export const GeneralMixin = {
         },
     },
     computed: {
+        mySavedCountriesComputed() {
+            return this.$store.getters.mySavedCountries;
+        },
         currentPageComputed() {
             return this.$store.getters.countryCurrentPage;
         },

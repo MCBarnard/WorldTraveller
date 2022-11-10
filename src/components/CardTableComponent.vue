@@ -33,7 +33,7 @@
         :lat="item.lat"
         :long="item.long"
         :maps="item.maps"
-        :rawItem="item"
+        :rawItem="item.rawItem"
       />
     </div>
   </div>

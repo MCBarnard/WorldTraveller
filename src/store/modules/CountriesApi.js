@@ -16,7 +16,7 @@ const CountriesApi = {
         },
         savedCountries: {
             stub: {
-                inUse: false,
+                inUse: true,
                 host: "https://restcountries.com/v3.1/name/united"
             },
             all: [],
@@ -66,8 +66,22 @@ const CountriesApi = {
         SET_MY_SAVED_COUNTRIES (state, items) {
             state.savedCountries.all = items;
         },
-        ACTION_SET_PUSH_TO_SAVED_COUNTRIES (state, item) {
+        SET_PUSH_TO_SAVED_COUNTRIES (state, item) {
             state.savedCountries.all.push(item);
+        },
+        SET_REMOVE_ITEM_FROM_SAVED_COUNTRIES (state, item) {
+            let length = state.savedCountries.all.length;
+            let indexToCut = undefined;
+
+            // Find index
+            for (let i =0; i <= length; i++) {
+                if (state.savedCountries.all[i].name.common === item) {
+                    indexToCut = i;
+                    break;
+                }
+            }
+            // splice transforms the array at the pointer
+            state.savedCountries.all.splice(indexToCut, 1);
         },
     },
     actions: {
@@ -84,7 +98,10 @@ const CountriesApi = {
             commit("SET_MY_SAVED_COUNTRIES", items);
         },
         ACTION_SET_PUSH_TO_SAVED_COUNTRIES ({ commit }, item) {
-            commit("ACTION_SET_PUSH_TO_SAVED_COUNTRIES", item);
+            commit("SET_PUSH_TO_SAVED_COUNTRIES", item);
+        },
+        ACTION_SET_REMOVE_ITEM_FROM_SAVED_COUNTRIES ({ commit }, item) {
+            commit("SET_REMOVE_ITEM_FROM_SAVED_COUNTRIES", item);
         },
     },
 }

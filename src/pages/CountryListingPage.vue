@@ -110,9 +110,6 @@ export default {
     await this.$store.dispatch("ACTION_SET_READY_FOR_NEXT_PAGE", true);
   },
   computed: {
-    mySavedCountriesComputed() {
-      return this.$store.getters.mySavedCountries;
-    },
     paginationHasNext() {
       return this.$store.getters.countryPaginationHasNext;
     },
@@ -138,7 +135,7 @@ export default {
   },
   methods: {
     clearFlippedCards() {
-      const items = document.getElementsByClassName("flipped");
+      let items = document.querySelectorAll(".flipped");
       for(let i = 0; i < items.length; i++) {
         this.flipCard(items[i].id);
       }
@@ -147,12 +144,14 @@ export default {
       // Clear all the flipped cards first
       this.clearFlippedCards();
 
-      const page = this.currentPageComputed;
-      if (direction === "next" && this.paginationHasNext) {
-        this.paginatedResults(this.allCountries, page + 1);
-      } else if (direction === "back" && this.paginationHasPrevious && page > 1) {
-        this.paginatedResults(this.allCountries, page - 1);
-      }
+      setTimeout(() => {
+        const page = this.currentPageComputed;
+        if (direction === "next" && this.paginationHasNext) {
+          this.paginatedResults(this.allCountries, page + 1);
+        } else if (direction === "back" && this.paginationHasPrevious && page > 1) {
+          this.paginatedResults(this.allCountries, page - 1);
+        }
+      }, 300);
     },
     async nameEntered() {
       if (this.nameFilter) {
@@ -165,7 +164,7 @@ export default {
           this.filterThroughData("country", this.nameFilter);
         }
       } else {
-        this.resetFilters();
+        await this.resetFilters();
       }
     },
     async resetFilters() {
@@ -194,7 +193,7 @@ export default {
       let data = this.paginatedCountries.data;
       data.forEach((item) => {
         formatted.push({
-          id: item.name.common,
+          id: item.area + "_" + item.population,
           country: item.name.common,
           region: item.region,
           subRegion: item.subregion,
@@ -202,6 +201,7 @@ export default {
           lat: item.latlng[0],
           long: item.latlng[1],
           maps: item.maps.googleMaps,
+          rawItem: item
         });
       })
       return formatted;

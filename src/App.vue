@@ -28,7 +28,6 @@ export default {
     // Fudge pre saved routes
     if (this.$store.getters.stupSavedCountries) {
       this.$axios.get(this.$store.getters.stupSavedCountriesURL).then(response => {
-        console.log(response.data)
         this.$store.dispatch("ACTION_SET_MY_SAVED_COUNTRIES", response.data);
       })
     }
