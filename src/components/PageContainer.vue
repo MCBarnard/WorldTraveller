@@ -46,6 +46,10 @@ export default {
   &__inner {
     display: block;
     width: 100%;
+
+    @media (max-width: 1080px) {
+      height: 100%;
+    }
   }
 
   &__loading {

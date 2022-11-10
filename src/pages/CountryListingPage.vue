@@ -7,6 +7,7 @@
       <div class="flex-container__left">
         <div class="home__countries">
           <card-table-component
+              @search="val => {nameEntered(val)}"
               pre="Done and Dusted, what's next"
               title="Countries of the World"
               sub="The world is waiting, take the leap and venture on to explore the unknown!"
@@ -153,7 +154,10 @@ export default {
         }
       }, 300);
     },
-    async nameEntered() {
+    async nameEntered(nameVal=null) {
+      if (nameVal !== null) {
+        this.nameFilter = nameVal;
+      }
       if (this.nameFilter) {
         // Check if we need to do new calls to the db
         if (!this.eagerLoadCountries) {
@@ -225,6 +229,15 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+  min-height: calc(100vh - 80px);
+
+  @media (max-width: 876px) {
+    padding: 40px;
+  }
+
+  @media (max-width: 530px) {
+    padding: 20px;
+  }
 
   .toast-holder {
     position: absolute;
@@ -232,6 +245,11 @@ export default {
     right: 0;
     height: 70px;
     z-index: 3;
+    pointer-events: none;
+
+    @media (max-width: 530px) {
+      top: 180px;
+    }
   }
 
   &__genex {
@@ -296,6 +314,10 @@ export default {
     margin-top: 45px;
     width: 360px;
     box-shadow: 0 0 50px -40px #625a5a;
+
+    @media (max-width: 1250px) {
+      padding: 20px;
+    }
 
     h3 {
       font-family: $heading-font;
@@ -405,6 +427,10 @@ export default {
     &__right {
       margin-left: 45px;
       height: 100%;
+
+      @media (max-width: 876px) {
+        display: none;
+      }
     }
   }
 }

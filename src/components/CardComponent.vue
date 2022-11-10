@@ -86,6 +86,19 @@ export default {
 .card {
   position: relative;
 
+  @media (max-width: 1250px) {
+    width: 250px;
+    margin: 10px;
+  }
+
+  @media (max-width: 1080px) {
+    width: 100%;
+  }
+
+  @media (max-width: 530px) {
+    margin: 0;
+  }
+
   & + .card {
     margin-top: 10px;
   }
@@ -106,6 +119,10 @@ export default {
     -moz-transition: all 0.2s;
     -o-transition: all 0.2s;
 
+    @media (max-width: 1250px) {
+      flex-direction: column;
+    }
+
     .vertical-divide {
       position: absolute;
       top: 5px;
@@ -116,6 +133,10 @@ export default {
       border-radius: 5px;
       background: $lightBlue;
       background: linear-gradient($lightBlue, $linkblue, $lightBlue);
+
+      @media (max-width: 1250px) {
+        display: none;
+      }
     }
 
     &__country {
@@ -189,6 +210,18 @@ export default {
       .bottom {
         display: flex;
 
+        @media (max-width: 1250px) {
+          flex-direction: column;
+        }
+
+        @media (max-width: 1080px) {
+          flex-direction: row;
+        }
+
+        @media (max-width: 530px) {
+          flex-direction: column;
+        }
+
         img {
           max-width: 150px;
           border-radius: 15px;
@@ -197,6 +230,21 @@ export default {
         .lines {
           margin-left: 16px;
           display: block;
+
+          @media (max-width: 1250px) {
+            margin-left: 0;
+            margin-top: 16px;
+          }
+
+          @media (max-width: 1080px) {
+            margin-left: 16px;
+            margin-top: 0;
+          }
+
+          @media (max-width: 530px) {
+            margin-left: 0;
+            margin-top: 16px;
+          }
 
           h4 {
             font-family: $heading-font;

@@ -42,6 +42,11 @@ export default {
   overflow-y: auto;
   display: flex;
 
+  @media (max-width: 1080px) {
+    flex-direction: column-reverse;
+    height: 100%;
+  }
+
   &__content {
     overflow-y: auto;
     width: 100%;

@@ -1,7 +1,6 @@
 <template>
   <div id="toast-container">
     <div :class="['toast', {'showing': toastState !== 'hidden'}]">
-<!--    <div class="toast showing">-->
       <div class="busy" v-show="toastState === 'busy'">
         <span></span>
       </div>
@@ -42,8 +41,13 @@ export default {
 #toast-container {
   width: 250px;
   height: 100%;
-  overflow: hidden;
+  overflow-x: hidden;
   position: relative;
+  pointer-events: none;
+
+  @media (max-width: 530px) {
+    width: 130px;
+  }
 }
 .toast {
   width: 70px;

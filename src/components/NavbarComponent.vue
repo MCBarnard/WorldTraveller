@@ -77,20 +77,35 @@ export default {
   flex-direction: column;
   justify-content: center;
 
+  @media (max-width: 1080px) {
+    width: 100vw;
+    height: 80px;
+    flex-direction: row;
+  }
+
   &__item {
     position: relative;
     padding: 20px 5px;
     border-radius: 50px 0 0 50px;
     cursor: pointer;
     margin-bottom: 40px;
+
+    @media (max-width: 1080px) {
+      padding: 25px 20px;
+      margin-bottom: 0;
+      margin-right: 40px;
+    }
   }
 
   &__item.active {
     background: $white;
     position: relative;
-    padding: 20px 5px;
     border-radius: 50px 0 0 50px;
 
+    @media (max-width: 1080px) {
+      padding: 25px 20px;
+      border-radius: 0 0 50px 50px;
+    }
 
     .navbar__item__top-border {
       content: "";
@@ -101,6 +116,13 @@ export default {
       width: 50px;
       background: $white;
 
+      @media (max-width: 1080px) {
+        bottom: 0;
+        left: -50px;
+        right: 0;
+        top: 0;
+      }
+
       &__overlay {
         content: "";
         position:absolute;
@@ -110,6 +132,11 @@ export default {
         width: 50px;
         border-bottom-right-radius: 50%;
         background: $genexBlue;
+
+        @media (max-width: 1080px) {
+          border-bottom-right-radius: 0;
+          border-top-right-radius: 50%;
+        }
       }
     }
 
@@ -122,6 +149,12 @@ export default {
       width: 50px;
       background: $white;
 
+      @media (max-width: 1080px) {
+        bottom: 0;
+        right: -50px;
+        top: 0;
+      }
+
       &__overlay {
         content: "";
         position:absolute;
@@ -131,6 +164,11 @@ export default {
         width: 50px;
         border-top-right-radius: 50%;
         background: $genexBlue;
+
+        @media (max-width: 1080px) {
+          border-top-right-radius: 0;
+          border-top-left-radius: 50%;
+        }
       }
     }
   }
