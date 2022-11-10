@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <div class="toast-holder">
+      <toast-component />
+    </div>
     <div class="flex-container">
       <div class="flex-container__left">
         <div class="home__countries">
@@ -71,6 +74,7 @@ import GenexSvg from "../components/SVGs/GenexSvg";
 import SmartFunction from "@/components/SmartFunction";
 import {GeneralMixin} from "@/mixins/GeneralMixin";
 import CardTableComponent from "@/components/CardTableComponent";
+import ToastComponent from "@/components/ToastComponent";
 
 export default {
   data() {
@@ -82,7 +86,8 @@ export default {
   components: {
     CardTableComponent,
     GenexSvg,
-    SmartFunction
+    SmartFunction,
+    ToastComponent
   },
   mixins: [GeneralMixin],
   async mounted() {
@@ -211,6 +216,14 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
+
+  .toast-holder {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    height: 70px;
+    z-index: 3;
+  }
 
   &__genex {
     display: flex;

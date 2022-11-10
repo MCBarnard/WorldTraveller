@@ -3,6 +3,7 @@
 export const GeneralMixin = {
     methods: {
         async fetchFreshCountryData(field=null, value=null) {
+            this.$store.dispatch("ACTION_SET_TOAST_STATE", "busy");
             let endpoint = this.countriesApiEndpoint
 
             if (field === null) {
@@ -13,7 +14,10 @@ export const GeneralMixin = {
             await this.$axios.get(endpoint).then(async response => {
                 await this.$store.dispatch("ACTION_SET_COUNTRIES", response.data).then(() => {
                     this.paginatedResults(response.data);
+                    this.$store.dispatch("ACTION_SET_TOAST_STATE", "success");
                 });
+            }).catch(() => {
+                this.$store.dispatch("ACTION_SET_TOAST_STATE", "error");
             });
         },
         paginatedResults(data, page=1, perPage=10) {

@@ -7,6 +7,11 @@ We also made use of a toggle inside the Countries Store that controls whether we
 
 Checkout the live site [here](https://www.google.com)
 
+My CSS loaders were shamelessly stolen off of codepen:
+* Busy: [https://codepen.io/kartar_developer/pen/abGGYgN](https://codepen.io/kartar_developer/pen/abGGYgN)
+* Success: [https://codepen.io/kizzo/pen/bMPVPW](https://codepen.io/kizzo/pen/bMPVPW)
+* Error: [https://codepen.io/kizzo/pen/bMPVPW](https://codepen.io/kizzo/pen/bMPVPW)
+
 ## Project setup
 ```
 npm install
