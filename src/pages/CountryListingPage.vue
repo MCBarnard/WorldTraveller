@@ -201,6 +201,7 @@ export default {
           flag: item.flags.png,
           lat: item.latlng[0],
           long: item.latlng[1],
+          maps: item.maps.googleMaps,
         });
       })
       return formatted;

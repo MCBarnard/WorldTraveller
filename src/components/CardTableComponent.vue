@@ -32,6 +32,8 @@
         :flag="item.flag"
         :lat="item.lat"
         :long="item.long"
+        :maps="item.maps"
+        :rawItem="item"
       />
     </div>
   </div>

@@ -14,18 +14,43 @@
     </div>
     <div class="card__back">
       <div class="card__hover-block"></div>
-      <button class="close-card" @click="flipCard('card_' + id)">Close</button>
-      <button>Add to my list!</button>
-      <button>Mark as visited</button>
+      <div class="detail">
+        <h3>Details</h3>
+        <div class="hr"></div>
+        <div class="bottom">
+          <img :src="flag">
+          <div class="lines">
+            <h4>Region: <small>{{ region }}</small></h4>
+            <h4>Sub-Region: <small>{{ subRegion }}</small></h4>
+            <h4>Latitude: <small>{{ lat }}</small></h4>
+            <h4>Longitude: <small>{{ long }}</small></h4>
+            <a :href="maps" target="_blank" rel="noreferrer">
+              Check it out on Google maps
+            </a>
+          </div>
+        </div>
+      </div>
+      <button class="close-card" @click="flipCard('card_' + id)">
+        <red-close-svg />
+      </button>
+      <button class="add-country" @click="handleAddEvent">
+        <green-plus-svg />
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import {GeneralMixin} from "@/mixins/GeneralMixin";
+import GreenPlusSvg from "@/components/SVGs/GreenPlusSvg";
+import RedCloseSvg from "@/components/SVGs/RedCloseSvg";
 
 export default {
   mixins: [GeneralMixin],
+  components: {
+    GreenPlusSvg,
+    RedCloseSvg
+  },
   props: {
     id: String,
     country: String,
@@ -33,7 +58,24 @@ export default {
     subRegion: String,
     flag: String,
     lat: Number,
-    long: Number
+    long: Number,
+    maps: String,
+    rawItem: Object
+  },
+  methods: {
+    handleAddEvent() {
+      // Start adding to persisted state, store for now
+      this.$store.dispatch("ACTION_SET_TOAST_STATE", "busy");
+
+      // Close current card
+      this.flipCard("card_" + this.id);
+
+      // Push item to list
+      this.$store.dispatch("ACTION_SET_PUSH_TO_SAVED_COUNTRIES", this.rawItem);
+
+      // Notify user of success
+      this.$store.dispatch("ACTION_SET_TOAST_STATE", "success");
+    }
   }
 }
 </script>
@@ -125,7 +167,6 @@ export default {
     border-radius: 15px;
     position: relative;
     box-shadow: 0 0 50px -40px #625a5a;
-    cursor: pointer;
     background: $bgGrey;
     padding: 20px;
     width: 100%;
@@ -133,6 +174,82 @@ export default {
     &:hover {
       .card__hover-block {
         display: block;
+      }
+    }
+
+    .detail {
+      .hr {
+        border-radius: 5px;
+        background: $lightBlue;
+        background: linear-gradient(to right, $lightBlue, $linkblue, $lightBlue);
+        width: 100%;
+        margin: 8px auto;
+        height: 2px;
+      }
+      .bottom {
+        display: flex;
+
+        img {
+          max-width: 150px;
+          border-radius: 15px;
+        }
+
+        .lines {
+          margin-left: 16px;
+          display: block;
+
+          h4 {
+            font-family: $heading-font;
+            color: $main-text-color;
+            font-size: 14px;
+
+            small {
+              font-family: $sub-font;
+              color: $sub-text-color;
+              font-size: 12px;
+            }
+          }
+
+          a {
+            display: block;
+            margin-top: 12px;
+            color: $linkblue;
+            text-decoration: none;
+            outline: none!important;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+    }
+
+    button {
+      background: transparent;
+      outline: none!important;
+      text-decoration: none!important;
+      border: none!important;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+
+      svg {
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        pointer-events: none;
+      }
+
+      &.close-card {
+        top: 15px;
+        right: 15px;
+      }
+
+      &.add-country {
+        top: 15px;
+        right: 45px;
       }
     }
   }

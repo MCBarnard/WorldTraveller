@@ -69,6 +69,10 @@ export const GeneralMixin = {
             }
         },
         async goToRoute(route) {
+            if (this.$route.name === route.name) {
+                // No need to navigate anywhere, same page
+                return;
+            }
             this.$store.dispatch("ACTION_SET_LOADING", true);
             this.$store.dispatch("ACTION_SET_READY_FOR_NEXT_PAGE", false);
 

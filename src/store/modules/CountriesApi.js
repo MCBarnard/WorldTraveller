@@ -66,6 +66,9 @@ const CountriesApi = {
         SET_MY_SAVED_COUNTRIES (state, items) {
             state.savedCountries.all = items;
         },
+        ACTION_SET_PUSH_TO_SAVED_COUNTRIES (state, item) {
+            state.savedCountries.all.push(item);
+        },
     },
     actions: {
         ACTION_SET_COUNTRIES ({ commit }, countries) {
@@ -79,6 +82,9 @@ const CountriesApi = {
         },
         ACTION_SET_MY_SAVED_COUNTRIES ({ commit }, items) {
             commit("SET_MY_SAVED_COUNTRIES", items);
+        },
+        ACTION_SET_PUSH_TO_SAVED_COUNTRIES ({ commit }, item) {
+            commit("ACTION_SET_PUSH_TO_SAVED_COUNTRIES", item);
         },
     },
 }
