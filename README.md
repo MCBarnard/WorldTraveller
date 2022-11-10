@@ -25,14 +25,12 @@ npm run serve
 
 ## Deploying
 ```
-nvm use v14
+nvm use v16.4.0
 ```
 ```
 npm run build
 ```
-```
-nvm use v16.4.0
-```
+Commit the work
 ```
 firebase login
 ```
@@ -43,3 +41,4 @@ firebase deploy
 ## Funny experiences to investigate after MVP
 * When chrome dev tools are open and you click on the next button, the text flickers and bugs out... Important to note that it does not occur when the tools are closed or in Firefox [Related Link](https://css-tricks.com/forums/topic/can-i-stop-flickering-on-hover/)
 * There is some dependancy issues with Firebase that required node 16.14 and our project running v14. Only affects us when we want to deploy
+* Fix GitHub Actions Work flow

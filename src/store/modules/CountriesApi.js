@@ -16,7 +16,7 @@ const CountriesApi = {
         },
         savedCountries: {
             stub: {
-                inUse: true,
+                inUse: false,
                 host: "https://restcountries.com/v3.1/name/united"
             },
             all: [],
