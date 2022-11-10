@@ -79,7 +79,11 @@ export default {
 
   @media (max-width: 1080px) {
     width: 100vw;
-    height: 80px;
+    // This looks silly on desktop but caters for mobile
+    // users when they have a native mobile
+    // navbar at the bottom of the screen, hopefully you
+    // reviewed it on a mobile?
+    height: 300px;
     flex-direction: row;
   }
 
@@ -91,7 +95,7 @@ export default {
     margin-bottom: 40px;
 
     @media (max-width: 1080px) {
-      padding: 25px 20px;
+      padding: 25px 20px 0;
       margin-bottom: 0;
       margin-right: 40px;
     }
@@ -103,8 +107,9 @@ export default {
     border-radius: 50px 0 0 50px;
 
     @media (max-width: 1080px) {
-      padding: 25px 20px;
+      padding: 25px 20px 0;
       border-radius: 0 0 50px 50px;
+      height: 65px;
     }
 
     .navbar__item__top-border {

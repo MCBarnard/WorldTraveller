@@ -229,7 +229,7 @@ export default {
   width: 100%;
   height: 100%;
   position: relative;
-  min-height: calc(100vh - 80px);
+  min-height: calc(100vh - 160px);
 
   @media (max-width: 876px) {
     padding: 40px;
