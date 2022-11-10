@@ -6,7 +6,7 @@
 * To similate some form of persistence, we implemented a stub option, which will call the api for some items and pre populate our list with "liked" countries, off by default as per the spec
 * The project started off with the idea of implementing a cookie system, where we would store our personally liked items in the application cookies and reference them later but to meet the deadline and allow myself to be okay with an MVP, I am calling it a v2 solution
 
-Checkout the live site [here](https://www.google.com)
+Checkout the live site [here](https://travelplanner-4ac13.web.app) hosted on Firebase
 
 My CSS loaders were shamelessly stolen off of codepen:
 * Busy: [https://codepen.io/kartar_developer/pen/abGGYgN](https://codepen.io/kartar_developer/pen/abGGYgN)

@@ -7,6 +7,27 @@
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
     <title><%= htmlWebpackPlugin.options.title %></title>
+
+    <!--  Add FireBase to app for hosting  -->
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+      // TODO: Add SDKs for Firebase products that you want to use
+      // https://firebase.google.com/docs/web/setup#available-libraries
+
+      // Your web app's Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyBpS-9I8SbVq9_Ah0hUPsBB8LuvcXv1spo",
+        authDomain: "travelplanner-4ac13.firebaseapp.com",
+        projectId: "travelplanner-4ac13",
+        storageBucket: "travelplanner-4ac13.appspot.com",
+        messagingSenderId: "936447040857",
+        appId: "1:936447040857:web:bd13213b46d7cf0888c048"
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+    </script>
   </head>
   <body>
     <noscript>
