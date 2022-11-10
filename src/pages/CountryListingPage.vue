@@ -46,7 +46,12 @@
                 name="My Travel List"
                 color="#FF971D"
             >
-              View <button class="travel-button" @click="goToRoute({name: 'travel-listing'})">My Travel List</button>
+              <div v-if="mySavedCountriesComputed.length > 0">
+                View <button class="travel-button" @click="goToRoute({name: 'travel-listing'})">My Travel List</button>
+              </div>
+              <span v-else>
+                You haven't selected anything yet
+              </span>
             </smart-function>
           </div>
 
@@ -105,6 +110,9 @@ export default {
     await this.$store.dispatch("ACTION_SET_READY_FOR_NEXT_PAGE", true);
   },
   computed: {
+    mySavedCountriesComputed() {
+      return this.$store.getters.mySavedCountries;
+    },
     paginationHasNext() {
       return this.$store.getters.countryPaginationHasNext;
     },

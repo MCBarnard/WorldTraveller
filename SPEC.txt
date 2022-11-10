@@ -1,0 +1,104 @@
+VUE Challenge:
+
+
+Build a travel destination builder SPA using Vue.
+
+
+You will build a website focused around a tool which lists all the countries in the world and lets you add them to a list of countries that you want to travel to.
+
+
+Use this public api as your source of countries:
+
+
+https://restcountries.com/#api-endpoints-v3-all
+
+
+The site navigation should contain:
+
+
+·
+Countries
+
+
+·
+My List (only show if there are items in the list)
+
+
+
+
+Countries - Index page
+
+
+Show a list of countries  (10 at a time with pagination)
+
+
+Search by name (using api)
+
+
+Show name of country and region only by default
+
+
+On clicking a country show the extra attributes for that country - region, subregion, flag, lat and long.
+
+
+Each country has an add to list button. If clicked it adds the country to your list (store)
+
+
+
+
+List page
+
+
+Display your listed countries (store)
+
+
+Have a button to remove (from store)
+
+
+Vue specific things we are looking for and should be included where appropriate:
+
+
+·
+Computed properties
+
+
+·
+Methods
+
+
+·
+Mixins
+
+
+·
+Components
+
+
+·
+State management
+
+
+·
+Axios or equivalent
+
+
+·
+Vue Router
+
+
+
+
+
+Things which will enhance your test are:
+
+
+·
+Responsiveness
+
+
+·
+Aesthetics
+
+
+·
+UX

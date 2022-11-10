@@ -9,11 +9,11 @@ const routes = [
         component: () => import('../pages/TravelListingPage.vue'),
         name: 'travel-listing'
     },
-    {
-        path: '/Cookie-Settings',
-        component: () => import('../pages/CookieSettingsPage.vue'),
-        name: 'cookie-settings'
-    },
+    // {
+    //     path: '/Cookie-Settings',
+    //     component: () => import('../pages/CookieSettingsPage.vue'),
+    //     name: 'cookie-settings'
+    // },
 ]
 
 export default routes;

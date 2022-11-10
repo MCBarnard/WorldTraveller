@@ -49,10 +49,10 @@ export default {
           route: "travel-listing",
           svg: shallowRef(ListingSvg)
         },
-        {
-          route: "cookie-settings",
-          svg: shallowRef(CookieSvg)
-        }
+        // {
+        //   route: "cookie-settings",
+        //   svg: shallowRef(CookieSvg)
+        // }
       ]
     }
   },
