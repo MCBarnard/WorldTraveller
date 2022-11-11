@@ -27,6 +27,7 @@ npm run serve
 ```
 
 ## Deploying
+Ensure that you are using Node ^16.4
 ```
 nvm use v16.4.0
 ```
