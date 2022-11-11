@@ -155,12 +155,16 @@ export default {
       }, 300);
     },
     async nameEntered(nameVal=null) {
-      if (nameVal !== null) {
+      if (nameVal !== null && typeof nameVal !== "object") {
         this.nameFilter = nameVal;
+      } else if (nameVal !== null && typeof nameVal === "object") {
+        this.nameFilter = nameVal.srcElement.value
       }
+
       if (this.nameFilter) {
         // Check if we need to do new calls to the db
         if (!this.eagerLoadCountries) {
+          console.log(this.nameFilter)
           await this.fetchFreshCountryData("name", this.nameFilter);
         } else {
           // preparing to filter
