@@ -13,6 +13,9 @@ My CSS loaders were shamelessly stolen off of codepen:
 * Success: [https://codepen.io/kizzo/pen/bMPVPW](https://codepen.io/kizzo/pen/bMPVPW)
 * Error: [https://codepen.io/geluk/pen/yLBjgrv](https://codepen.io/geluk/pen/yLBjgrv)
 
+And project design was derived from Dribbble
+* [https://dribbble.com/shots/9551899-Dashboard-CleanMac](https://dribbble.com/shots/9551899-Dashboard-CleanMac)
+
 ## Project setup
 ```
 npm install
